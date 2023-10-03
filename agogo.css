@@ -1,0 +1,42 @@
+body{
+    background-color: rgba(18, 209, 63, 0.584);
+    color: white;
+}
+.minuteur{
+    display: flex;
+    justify-content: space-around;
+}
+button {
+    background-color: rgba(115, 222, 140, 0.584);
+    color: white;
+    border: none;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+}
+
+.affiche {
+    display: flex;
+    justify-content: center;
+    margin-top: 600px;
+    font-size: 90px;
+}
+
+.Black {
+    display: flex ;
+    justify-content: center;
+}
+
+.date {
+    margin-top: -90px;
+}
