@@ -1,10 +1,11 @@
 let date = document.querySelector(".date");
 let jour = new Date()
 
-let dateLocale = jour.toLocaleString('fr-FR',{
+let dateLocale = jour.toLocaleString('fr-FR', {
     hour: 'numeric',
     minute: 'numeric',
-    second: 'numeric'});
+    second: 'numeric'
+});
 
 let vingtSeconde = document.querySelector(".secs");
 let cappucino = document.querySelector(".CAPPUCINO");
@@ -12,11 +13,11 @@ let the = document.querySelector(".THE-15");
 let petit = document.querySelector(".PETIT-DEJEUNER");
 let DEJ = document.querySelector(".DEJEUNER");
 
-function firstZero(int){
-    if(int <= 9 && int >= 0) {
+function firstZero(int) {
+    if (int <= 9 && int >= 0) {
         return '0' + int;
 
-    } else{
+    } else {
         return int;
     }
 }
@@ -24,7 +25,7 @@ function firstZero(int){
 let ser = document.querySelector(".affiche");
 let enfant = document.querySelector(".Affiche")
 
-let timeout, seg = 59;
+let timeout, seg, min , hours , back , durer , cron;
 // function chronos (minute){
 //     let cron;
 //     if ( min == minute) {
@@ -54,9 +55,8 @@ let timeout, seg = 59;
 // }
 
 function chronos(minutes) {
-    let cron;
-    let hours = Math.floor(minutes / 60); 
-    minutes = minutes % 60; 
+     hours = Math.floor(minutes / 60);
+    minutes = minutes % 60;
 
     if (minutes === 0 && hours === 0 && seg === 0) {
         clearTimeout(timeout);
@@ -68,7 +68,7 @@ function chronos(minutes) {
 
         if (seg < 0) {
             if (minutes > 0) {
-                minutes --;
+                minutes--;
                 seg = 59;
             } else if (hours > 0) {
                 hours--;
@@ -82,67 +82,75 @@ function chronos(minutes) {
 }
 
 
-function iniciar(minute){
+function after(minute) {
+
+
+    let currentDate = new Date();
+    currentDate.setMinutes(currentDate.getMinutes() + minute);
+    retour = currentDate.toLocaleTimeString('fr-FR', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    });
+    date.textContent = "Be Black at " + retour;
+}
+
+function after1(seg){
+    let currentDate = new Date();
+    currentDate.setSeconds(currentDate.getSeconds() + seg);
+    retour = currentDate.toLocaleTimeString('fr-FR', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    });
+    date.textContent = "Be Black at " + retour;
+}
+
+
+function iniciar(minute) {
     min = minute;
     clearTimeout(timeout);
-    after (minute)
+    after(minute)
     chronos(minute);
 }
 
-
-
-function after (minute) {
-  let durer = minute * 60 * 1000;
-  let back =  new Date (jour.getTime() + durer + seg)
-  retour = back.toLocaleTimeString('fr-FR',{
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric'});;
-
-date.textContent = "Be Black at " + retour ;
-}
-
- cappucino.addEventListener('click', function (){
-    seg = 00;
+cappucino.addEventListener('click', function () {
+    seg = 0;
     iniciar(5)
-    date.textContent = "Be Black at " + retour ;
- });
- the.addEventListener('click', function (){
-    seg = 00;
+});
+the.addEventListener('click', function () {
+    seg = 0;
     iniciar(15);
-    date.textContent = "Be Black at " + retour ;
- });
- petit.addEventListener('click', function (){
-    seg = 00;
+});
+petit.addEventListener('click', function () {
+    seg = 0;
     iniciar(20);
-    date.textContent = "Be Black at " + retour ;
- });
- DEJ.addEventListener('click', function (){
-    seg = 00;
+});
+DEJ.addEventListener('click', function () {
+    seg = 0;
     iniciar(30);
-    date.textContent = "Be Black at " + retour ;
- });
+});
 
- vingtSeconde.addEventListener('click' , function () {
-
+vingtSeconde.addEventListener('click', function () {
     seg = 20;
     min = 0;
     hours = 0;
     clearTimeout(timeout);
     timeout = setTimeout(chronos, 1000, min);
-    date.textContent = "Be Black at " + retour;
- });
+    after1(20)
+});
 
 let input = document.querySelector("input");
 
-input.addEventListener("keydown" , function (event){
+input.addEventListener("keydown", function (event) {
 
 
     if (event.key === 'Enter') {
         const valeur = parseFloat(input.value);
-          minute = valeur;
-      }
-     seg = 0
-      iniciar(minute)
-   
+        minute = valeur;
+        seg = 0
+        iniciar(minute)
+    }
+
+
 })

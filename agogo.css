@@ -28,7 +28,7 @@ input {
 .affiche {
     display: flex;
     justify-content: center;
-    margin-top: 600px;
+    margin-top: 500px;
     font-size: 90px;
 }
 
